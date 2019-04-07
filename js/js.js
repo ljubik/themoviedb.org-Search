@@ -17,12 +17,30 @@ var cargarTabla = function(urlApiApiKey, numero) {
       $.each(respuesta.results, function(indice, elemento) {
         Films += "<div>";
         Films +=
-          '<br class="title"><a href="">' + elemento.title + "</a></div>";
+          '<br class="title"><a href="https://image.tmdb.org/t/p/w500' +
+          elemento.poster_path +
+          '"?d=" " alt="' +
+          elemento.title +
+          '"/><hr>">' +
+          elemento.title +
+          "</a></div>";
       });
     } else {
       Films = "<div><p>Фільми недоступні</p></div>";
     }
     document.getElementById("principal").innerHTML = Films + "</div>";
+
+    if (elemento.poster_path !== null || elemento.poster_path === "null") {
+      Films +=
+        '<img src="https://image.tmdb.org/t/p/w500' +
+        elemento.poster_path +
+        "?d=" +
+        new Date();
+      '" alt="' + elemento.title + '"/><hr>';
+    } else {
+      Films += '<img src="http://cil.org.ua/img/logo.jpg"' + "?d=" + new Date();
+      (' alt="Фільми зараз недоступні натомість логотип"/><hr>');
+    }
   });
 };
 
